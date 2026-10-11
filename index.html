@@ -14,6 +14,15 @@
 </head>
 <body>
 
+    <!-- Full-Screen Architectural Background Slideshow (Exterior & Interior) -->
+    <div class="site-bg-slideshow" id="site-bg-slideshow" aria-hidden="true">
+        <div class="bg-slide active" style="background-image: url('assets/bg_exterior_villa.jpg');" data-type="Exterior" data-title="Contemporary Coastal Villa"></div>
+        <div class="bg-slide" style="background-image: url('assets/bg_interior_living.jpg');" data-type="Interior" data-title="Emerald &amp; Gold Master Salon"></div>
+        <div class="bg-slide" style="background-image: url('assets/bg_interior_kitchen.jpg');" data-type="Interior" data-title="Navy &amp; Brass Bespoke Kitchen"></div>
+        <div class="bg-slide" style="background-image: url('assets/bg_exterior_manor.jpg');" data-type="Exterior" data-title="Georgian Heritage Manor"></div>
+        <div class="site-bg-overlay"></div>
+    </div>
+
     <!-- Header Navigation -->
     <header class="main-header">
         <div class="container header-container">
@@ -27,8 +36,7 @@
                     <li><a href="#home" class="nav-link active">Home</a></li>
                     <li><a href="#services" class="nav-link">Services</a></li>
                     <li><a href="#portfolio" class="nav-link">Our Work</a></li>
-                    <li><a href="#testimonials" class="nav-link">Reviews</a></li>
-                    <li><a href="#comments" class="nav-link">Comments</a></li>
+                    <li><a href="#reviews" class="nav-link">Reviews</a></li>
                     <li><a href="#contact" class="nav-link">Contact</a></li>
                 </ul>
             </nav>
@@ -389,88 +397,53 @@
         </div>
     </section>
 
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="testimonials-section">
+    <!-- Client Reviews & Feedback Section -->
+    <section id="reviews" class="reviews-section">
         <div class="container">
             <div class="section-header text-center">
                 <span class="section-subtitle gold-text">Client Testimonials</span>
                 <h2 class="section-title">What Our Customers Say</h2>
                 <div class="section-divider"></div>
                 <p class="section-description">
-                    Read feedback from residential and commercial clients who experienced Viktor's meticulous decorating craftsmanship.
+                    Read genuine feedback from residential and commercial clients, or share your own experience with Viktor Painting & Decorating.
                 </p>
             </div>
 
-            <div class="testimonials-grid">
-                <!-- Testimonial 1 -->
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p class="testimonial-text">
-                        "Viktor painted our entire hallway, stairs, and landing, including extensive wall prep and lining paper. His attention to detail is absolutely second to none. Crisp edges, no dust left behind, and a stunning finish. We've already booked him for our kitchen cabinets next month!"
-                    </p>
-                    <div class="testimonial-author">
-                        <div class="author-details">
-                            <h4 class="author-name">Sarah & Mark Higgins</h4>
-                            <span class="author-location gold-text">Residential Client</span>
-                        </div>
+            <div class="reviews-container">
+                <!-- Feed Header with live counter and refresh -->
+                <div class="comments-feed-header">
+                    <div class="feed-title-wrapper">
+                        <h3 class="feed-title">Verified Client Reviews</h3>
+                        <span class="comments-badge" id="comments-count">0</span>
+                    </div>
+                    <button type="button" class="btn-refresh" id="refresh-comments-btn" title="Refresh reviews">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" class="refresh-icon">
+                            <path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+                        </svg>
+                        <span>Refresh</span>
+                    </button>
+                </div>
+
+                <!-- Dynamic Live Review Cards Container -->
+                <div class="comments-list" id="comments-list">
+                    <div class="comments-loading">
+                        <div class="comment-spinner"></div>
+                        <p>Loading client reviews...</p>
                     </div>
                 </div>
 
-                <!-- Testimonial 2 -->
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p class="testimonial-text">
-                        "Absolutely top tier work. We hired Viktor to repaint our shop front and interior showroom. He was incredibly flexible, working overnight shifts so we didn't have to close during business hours. A true professional who is fully insured, highly skilled, and reliable."
-                    </p>
-                    <div class="testimonial-author">
-                        <div class="author-details">
-                            <h4 class="author-name">Julian Vance</h4>
-                            <span class="author-location gold-text">Owner, Boutique Galleries</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Testimonial 3 -->
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p class="testimonial-text">
-                        "Viktor is a perfectionist. He sprayed our old wood kitchen cabinets and they literally look brand new. The paint coating is smooth as glass and extremely tough. His 20 years of experience clearly shows. I cannot recommend him enough if you want a luxury finish."
-                    </p>
-                    <div class="testimonial-author">
-                        <div class="author-details">
-                            <h4 class="author-name">Eleanor Rose</h4>
-                            <span class="author-location gold-text">Residential Client</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Comments Section -->
-    <section id="comments" class="comments-section">
-        <div class="container">
-            <div class="section-header text-center">
-                <span class="section-subtitle gold-text">Discussion</span>
-                <h2 class="section-title">Client Comments & Feedback</h2>
-                <div class="section-divider"></div>
-                <p class="section-description">
-                    We welcome your questions, feedback, and discussion. Join the conversation below!
-                </p>
-            </div>
-            <div class="comments-container">
-                <!-- Comment submission card -->
+                <!-- Leave a Review Form Card -->
                 <div class="comment-form-card">
                     <div class="comment-form-header">
-                        <h3 class="comment-form-title">Leave a Review or Comment</h3>
-                        <p class="comment-form-subtitle">No account or login required. We value your feedback!</p>
+                        <h3 class="comment-form-title">Leave a Review</h3>
+                        <p class="comment-form-subtitle">Share your honest feedback about our craftsmanship and service. No login required!</p>
                     </div>
                     
                     <form id="comment-form" class="comment-form">
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="comment-author">Your Name *</label>
-                                <input type="text" id="comment-author" placeholder="e.g. John Smith" required maxlength="60">
+                                <input type="text" id="comment-author" placeholder="e.g. Sarah Higgins" required maxlength="60">
                             </div>
                             <div class="form-group">
                                 <label>Your Rating</label>
@@ -489,40 +462,18 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="comment-message">Your Comment or Feedback *</label>
-                            <textarea id="comment-message" rows="4" placeholder="Write your thoughts, experience, or question..." required maxlength="1000"></textarea>
+                            <label for="comment-message">Your Review *</label>
+                            <textarea id="comment-message" rows="4" placeholder="Describe the project, quality of work, cleanliness, or recommendation..." required maxlength="1000"></textarea>
                         </div>
 
                         <div class="comment-form-footer">
                             <button type="submit" class="btn btn-primary" id="comment-submit-btn">
-                                <span>Post Comment</span>
+                                <span>Post Review</span>
                                 <span class="btn-arrow">→</span>
                             </button>
                             <div class="form-status" id="comment-status"></div>
                         </div>
                     </form>
-                </div>
-
-                <!-- Comments Feed Header -->
-                <div class="comments-feed-header">
-                    <div class="feed-title-wrapper">
-                        <h3 class="feed-title">Client Feedback</h3>
-                        <span class="comments-badge" id="comments-count">0</span>
-                    </div>
-                    <button type="button" class="btn-refresh" id="refresh-comments-btn" title="Refresh comments">
-                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" class="refresh-icon">
-                            <path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
-                        </svg>
-                        <span>Refresh</span>
-                    </button>
-                </div>
-
-                <!-- Dynamic Comments List Container -->
-                <div class="comments-list" id="comments-list">
-                    <div class="comments-loading">
-                        <div class="comment-spinner"></div>
-                        <p>Loading comments...</p>
-                    </div>
                 </div>
             </div>
         </div>
@@ -630,8 +581,7 @@
                     <li><a href="#home">Home</a></li>
                     <li><a href="#services">Services</a></li>
                     <li><a href="#portfolio">Our Work</a></li>
-                    <li><a href="#testimonials">Reviews</a></li>
-                    <li><a href="#comments">Comments</a></li>
+                    <li><a href="#reviews">Reviews</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </div>
