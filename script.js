@@ -391,7 +391,7 @@ document.addEventListener('DOMContentLoaded', () => {
             commentsList.innerHTML = `
                 <div class="comments-empty">
                     <div class="comments-empty-icon">💬</div>
-                    <h4>No comments yet</h4>
+                    <h4>No reviews yet</h4>
                     <p>Be the first to share your experience with Viktor Painting & Decorating!</p>
                 </div>
             `;
@@ -411,14 +411,17 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="comment-item-top">
                         <div class="comment-item-author-box">
                             <div class="comment-avatar">${initials}</div>
-                            <div class="comment-author-name">${safeName}</div>
+                            <div>
+                                <h4 class="comment-author-name">${safeName}</h4>
+                                <span class="comment-author-badge gold-text">Verified Client</span>
+                            </div>
                         </div>
                         <div class="comment-item-meta">
                             <span class="comment-stars" title="${safeRating} out of 5 stars">${starsText}</span>
                             <span class="comment-date">${dateStr}</span>
                         </div>
                     </div>
-                    <p class="comment-item-message">${safeMessage}</p>
+                    <p class="comment-item-message">"${safeMessage}"</p>
                 </article>
             `;
         }).join('');
@@ -515,7 +518,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Success!
                 if (commentStatus) {
                     commentStatus.className = 'form-status success';
-                    commentStatus.textContent = '✓ Thank you! Your comment has been posted.';
+                    commentStatus.textContent = '✓ Thank you! Your review has been posted.';
                 }
 
                 // Reset inputs
@@ -543,12 +546,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error('Failed to post comment:', err);
                 if (commentStatus) {
                     commentStatus.className = 'form-status error';
-                    commentStatus.textContent = 'Failed to post comment. Please try again.';
+                    commentStatus.textContent = 'Failed to post review. Please try again.';
                 }
             } finally {
                 if (commentSubmitBtn) {
                     commentSubmitBtn.disabled = false;
-                    commentSubmitBtn.innerHTML = '<span>Post Comment</span><span class="btn-arrow">→</span>';
+                    commentSubmitBtn.innerHTML = '<span>Post Review</span><span class="btn-arrow">→</span>';
                 }
             }
         });
@@ -563,4 +566,57 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initial load of comments
     fetchComments();
+
+    // ==========================================
+    // 6. Dynamic Exterior & Interior Full-Page Background Slideshow
+    // ==========================================
+    const bgSlides = document.querySelectorAll('.site-bg-slideshow .bg-slide');
+
+    if (bgSlides.length > 0) {
+        let currentSlideIndex = 0;
+        let slideInterval = null;
+        const slideDuration = 7000; // 7s per background scene
+
+        const showSlide = (index) => {
+            bgSlides.forEach((slide, i) => {
+                slide.classList.remove('active', 'previous');
+                if (i === index) {
+                    slide.classList.add('active');
+                } else if (i === currentSlideIndex) {
+                    slide.classList.add('previous');
+                }
+            });
+            currentSlideIndex = index;
+        };
+
+        const nextSlide = () => {
+            const nextIndex = (currentSlideIndex + 1) % bgSlides.length;
+            showSlide(nextIndex);
+        };
+
+        const startSlideshow = () => {
+            stopSlideshow();
+            slideInterval = setInterval(nextSlide, slideDuration);
+        };
+
+        const stopSlideshow = () => {
+            if (slideInterval) {
+                clearInterval(slideInterval);
+                slideInterval = null;
+            }
+        };
+
+        // Pause when browser tab is inactive to save resources and prevent desync
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                stopSlideshow();
+            } else {
+                startSlideshow();
+            }
+        });
+
+        // Initialize first slide and start automatic smooth transitions
+        showSlide(0);
+        startSlideshow();
+    }
 });
