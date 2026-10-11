@@ -1,28 +1,29 @@
 /* ----------------------------------------------------
    Viktor Painting & Decorating - Premium Styling
-   Design System: Midnight Black, Charcoal, Luxury Gold
+   Design System: Radiant Ivory, Soft White, Luxury Gold
 ------------------------------------------------------- */
 
 /* --- Custom Properties (Design Tokens) --- */
 :root {
-    /* Color Palette */
-    --bg-primary: #0a0a0a;
-    --bg-secondary: #121212;
-    --bg-tertiary: #1a1a1a;
-    --bg-card: #181818;
-    --bg-card-hover: #222222;
+    /* Color Palette - Premium Light Palette */
+    --bg-primary: #fdfdfb;
+    --bg-secondary: #f6f5f0;
+    --bg-tertiary: #ebe9df;
+    --bg-card: rgba(255, 255, 255, 0.9);
+    --bg-card-hover: rgba(255, 255, 255, 0.98);
     
-    --text-primary: #ffffff;
-    --text-muted: #a3a3a3;
-    --text-dark: #121212;
+    --text-primary: #1c1a17;
+    --text-muted: #5e5952;
+    --text-dark: #1c1a17;
+    --text-light: #ffffff;
 
     /* Metallic Gold Accents */
-    --gold-light: #f3e5ab;
-    --gold-solid: #d4af37;
+    --gold-light: #fefcf3;
+    --gold-solid: #c5a028;
     --gold-dark: #aa7c11;
-    --gold-gradient: linear-gradient(135deg, #f3e5ab 0%, #d4af37 50%, #aa7c11 100%);
-    --gold-glow: 0 0 20px rgba(212, 175, 55, 0.25);
-    --gold-glow-intense: 0 0 25px rgba(212, 175, 55, 0.45);
+    --gold-gradient: linear-gradient(135deg, #f3e5ab 0%, #c5a028 50%, #aa7c11 100%);
+    --gold-glow: 0 4px 20px rgba(197, 160, 40, 0.16);
+    --gold-glow-intense: 0 6px 25px rgba(197, 160, 40, 0.28);
     
     /* Layout & Spacing */
     --container-width: 1200px;
@@ -53,17 +54,81 @@ html {
 }
 
 body {
-    background-color: #080808;
-    background-image: 
-        radial-gradient(circle at 10% 20%, rgba(212, 175, 55, 0.06) 0%, transparent 40%),
-        radial-gradient(circle at 90% 80%, rgba(170, 124, 17, 0.04) 0%, transparent 45%),
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cpath d='M40 0 L80 40 L40 80 L0 40 Z' fill='none' stroke='rgba(212, 175, 55, 0.015)' stroke-width='0.75'/%3E%3Cpath d='M40 10 L70 40 L40 70 L10 40 Z' fill='none' stroke='rgba(212, 175, 55, 0.008)' stroke-width='0.5'/%3E%3C/svg%3E");
-    background-attachment: scroll, scroll, fixed;
+    background-color: var(--bg-primary);
     color: var(--text-primary);
     font-family: var(--font-body);
     line-height: 1.6;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
+    position: relative;
+    min-height: 100vh;
+}
+
+/* =======================================================
+   Full-Screen Architectural Dynamic Background System
+   (Exterior & Interior Photorealistic Slideshow - All HTML)
+========================================================== */
+.site-bg-slideshow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -5;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.bg-slide {
+    position: absolute;
+    inset: -30px; /* Bleed for gentle Ken Burns drift */
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transform: scale(1.08) translate3d(0, 0, 0);
+    transition: opacity 1.8s cubic-bezier(0.4, 0, 0.2, 1), transform 8s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: opacity, transform;
+    filter: brightness(0.88) contrast(1.08) saturate(1.1);
+}
+
+.bg-slide.active {
+    opacity: 1;
+    transform: scale(1) translate3d(0, 0, 0);
+    z-index: 1;
+}
+
+.bg-slide.previous {
+    opacity: 0;
+    transform: scale(0.97) translate3d(0, 0, 0);
+    z-index: 0;
+}
+
+/* Slightly Darker, Luxurious Architectural Ambient Veil */
+.site-bg-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: 
+        radial-gradient(circle at 35% 30%, rgba(20, 18, 15, 0.18) 0%, rgba(20, 18, 15, 0.34) 55%, rgba(15, 14, 12, 0.5) 100%),
+        linear-gradient(180deg, 
+            rgba(20, 18, 15, 0.3) 0%, 
+            rgba(20, 18, 15, 0.14) 25%, 
+            rgba(20, 18, 15, 0.22) 60%, 
+            rgba(15, 14, 12, 0.42) 100%);
+    pointer-events: none;
+}
+
+.site-bg-overlay::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: 
+        radial-gradient(circle at 85% 20%, rgba(197, 160, 40, 0.1) 0%, transparent 45%),
+        radial-gradient(circle at 10% 80%, rgba(197, 160, 40, 0.08) 0%, transparent 40%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cpath d='M40 0 L80 40 L40 80 L0 40 Z' fill='none' stroke='rgba(197, 160, 40, 0.04)' stroke-width='0.75'/%3E%3C/svg%3E");
+    background-attachment: scroll, scroll, fixed;
+    pointer-events: none;
 }
 
 .container {
@@ -166,14 +231,15 @@ p {
 }
 
 .btn-secondary {
-    background-color: var(--bg-tertiary);
+    background-color: rgba(255, 255, 255, 0.9);
     color: var(--text-primary);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(30, 26, 21, 0.12);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
 }
 
 .btn-secondary:hover {
-    background-color: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.2);
+    background-color: #ffffff;
+    border-color: rgba(197, 160, 40, 0.4);
     transform: translateY(-2px);
 }
 
@@ -210,19 +276,19 @@ p {
     left: 0;
     width: 100%;
     height: var(--header-height);
-    background-color: rgba(10, 10, 10, 0.8);
+    background-color: rgba(253, 253, 251, 0.88);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     z-index: 1000;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(30, 26, 21, 0.06);
     transition: var(--transition-smooth);
 }
 
 .main-header.scrolled {
     height: 70px;
-    background-color: rgba(10, 10, 10, 0.95);
-    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    background-color: rgba(253, 253, 251, 0.98);
+    border-bottom: 1px solid rgba(197, 160, 40, 0.2);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
 .header-container {
@@ -350,7 +416,14 @@ p {
 }
 
 .hero-content {
-    max-width: 650px;
+    max-width: 660px;
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 44px 46px;
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(197, 160, 40, 0.22);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.05);
 }
 
 .hero-subtitle {
@@ -412,6 +485,11 @@ p {
     gap: 20px;
 }
 
+/* --- Interactive Background Scene Switcher (Hidden as requested) --- */
+.hero-scene-control {
+    display: none !important;
+}
+
 /* --- SVG Roller Animation Keyframes --- */
 .paint-path {
     stroke-dasharray: 2200;
@@ -456,8 +534,15 @@ section {
 }
 
 .section-header {
-    max-width: 700px;
+    max-width: 720px;
     margin: 0 auto 60px;
+    background: rgba(255, 255, 255, 0.78);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 26px 36px;
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(197, 160, 40, 0.2);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
 }
 
 .section-subtitle {
@@ -488,11 +573,11 @@ section {
 
 /* --- Services / Features Section --- */
 .services-section {
-    background-color: rgba(18, 18, 18, 0.85);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-top: 1px solid rgba(255, 255, 255, 0.02);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-top: 1px solid rgba(197, 160, 40, 0.12);
+    border-bottom: 1px solid rgba(197, 160, 40, 0.12);
 }
 
 .features-grid {
@@ -504,9 +589,10 @@ section {
 
 .feature-card {
     background-color: var(--bg-card);
-    border: 1px solid rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(197, 160, 40, 0.15);
     padding: 32px 24px;
     border-radius: var(--radius-lg);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.03);
     transition: var(--transition-smooth);
     display: flex;
     flex-direction: column;
@@ -515,22 +601,22 @@ section {
 
 .feature-card:hover {
     transform: translateY(-8px);
-    border-color: rgba(212, 175, 55, 0.25);
-    box-shadow: var(--gold-glow);
+    border-color: rgba(197, 160, 40, 0.4);
+    box-shadow: 0 12px 35px rgba(197, 160, 40, 0.18);
     background-color: var(--bg-card-hover);
 }
 
 .feature-icon {
     width: 48px;
     height: 48px;
-    background-color: rgba(212, 175, 55, 0.08);
+    background-color: rgba(197, 160, 40, 0.1);
     color: var(--gold-solid);
     display: inline-flex;
     align-items: center;
     justify-content: center;
     border-radius: var(--radius-md);
     margin-bottom: 24px;
-    border: 1px solid rgba(212, 175, 55, 0.15);
+    border: 1px solid rgba(197, 160, 40, 0.2);
     transition: var(--transition-smooth);
 }
 
@@ -569,7 +655,8 @@ section {
     border-radius: var(--radius-lg);
     padding: 48px;
     overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(197, 160, 40, 0.15);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.03);
     transition: var(--transition-smooth);
 }
 
@@ -581,14 +668,14 @@ section {
     width: 3px;
     height: 100%;
     background: var(--gold-gradient);
-    opacity: 0.3;
+    opacity: 0.4;
     transition: var(--transition-smooth);
 }
 
 .service-box:hover {
     transform: translateX(5px);
-    border-color: rgba(212, 175, 55, 0.2);
-    box-shadow: var(--gold-glow);
+    border-color: rgba(197, 160, 40, 0.4);
+    box-shadow: 0 12px 35px rgba(197, 160, 40, 0.15);
 }
 
 .service-box:hover::before {
@@ -615,9 +702,9 @@ section {
 
 /* --- Portfolio Before / After Sliders --- */
 .portfolio-section {
-    background-color: rgba(10, 10, 10, 0.7);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
 }
 
 .portfolio-grid {
@@ -630,13 +717,14 @@ section {
     background-color: var(--bg-card);
     border-radius: var(--radius-lg);
     overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(197, 160, 40, 0.16);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
     transition: var(--transition-smooth);
 }
 
 .portfolio-item-card:hover {
-    border-color: rgba(212, 175, 55, 0.2);
-    box-shadow: var(--gold-glow);
+    border-color: rgba(197, 160, 40, 0.4);
+    box-shadow: 0 14px 40px rgba(197, 160, 40, 0.18);
 }
 
 .slider-wrapper {
@@ -797,11 +885,11 @@ section {
 
 /* --- Testimonials Section --- */
 .testimonials-section {
-    background-color: rgba(18, 18, 18, 0.85);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-top: 1px solid rgba(255, 255, 255, 0.02);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-top: 1px solid rgba(197, 160, 40, 0.12);
+    border-bottom: 1px solid rgba(197, 160, 40, 0.12);
 }
 
 .testimonials-grid {
@@ -812,9 +900,10 @@ section {
 
 .testimonial-card {
     background-color: var(--bg-card);
-    border: 1px solid rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(197, 160, 40, 0.15);
     border-radius: var(--radius-lg);
     padding: 40px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.03);
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -830,14 +919,14 @@ section {
     font-family: var(--font-heading);
     font-size: 5rem;
     line-height: 1;
-    color: rgba(212, 175, 55, 0.06);
+    color: rgba(197, 160, 40, 0.1);
     pointer-events: none;
 }
 
 .testimonial-card:hover {
-    border-color: rgba(212, 175, 55, 0.2);
+    border-color: rgba(197, 160, 40, 0.4);
     transform: translateY(-5px);
-    box-shadow: var(--gold-glow);
+    box-shadow: 0 12px 35px rgba(197, 160, 40, 0.15);
     background-color: var(--bg-card-hover);
 }
 
@@ -859,13 +948,14 @@ section {
 }
 
 .testimonial-author {
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 1px solid rgba(30, 26, 21, 0.08);
     padding-top: 20px;
 }
 
 .author-name {
     font-size: 1rem;
     margin-bottom: 4px;
+    color: var(--text-primary);
 }
 
 .author-location {
@@ -873,14 +963,15 @@ section {
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.1em;
+    color: var(--text-muted);
 }
 
 /* --- Contact & Quote Section --- */
 .contact-section {
-    background-color: rgba(10, 10, 10, 0.7);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    background-color: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(197, 160, 40, 0.12);
 }
 
 .contact-container {
@@ -915,8 +1006,8 @@ section {
 .contact-icon {
     width: 44px;
     height: 44px;
-    background-color: rgba(212, 175, 55, 0.08);
-    border: 1px solid rgba(212, 175, 55, 0.15);
+    background-color: rgba(197, 160, 40, 0.1);
+    border: 1px solid rgba(197, 160, 40, 0.2);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -955,16 +1046,17 @@ a.contact-value:hover {
     display: flex;
     align-items: center;
     gap: 16px;
-    background-color: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background-color: rgba(255, 255, 255, 0.75);
+    border: 1px solid rgba(197, 160, 40, 0.18);
     padding: 20px 24px;
     border-radius: var(--radius-md);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
 }
 
 .badge-check {
     width: 24px;
     height: 24px;
-    background-color: rgba(212, 175, 55, 0.15);
+    background-color: rgba(197, 160, 40, 0.15);
     border: 1px solid var(--gold-solid);
     color: var(--gold-solid);
     border-radius: 50%;
@@ -984,11 +1076,11 @@ a.contact-value:hover {
 
 /* Quote Form Block */
 .contact-form-block {
-    background-color: var(--bg-secondary);
-    border: 1px solid rgba(255, 255, 255, 0.03);
+    background-color: var(--bg-card);
+    border: 1px solid rgba(197, 160, 40, 0.18);
     border-radius: var(--radius-lg);
     padding: 50px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
 }
 
 .quote-form {
@@ -1018,8 +1110,8 @@ a.contact-value:hover {
 .form-group input, 
 .form-group select, 
 .form-group textarea {
-    background-color: var(--bg-tertiary);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background-color: #ffffff;
+    border: 1px solid rgba(30, 26, 21, 0.14);
     color: var(--text-primary);
     padding: 14px 18px;
     border-radius: var(--radius-sm);
@@ -1034,7 +1126,7 @@ a.contact-value:hover {
 .form-group select:focus, 
 .form-group textarea:focus {
     border-color: var(--gold-solid);
-    box-shadow: 0 0 10px rgba(212, 175, 55, 0.15);
+    box-shadow: 0 0 10px rgba(197, 160, 40, 0.2);
 }
 
 .form-group textarea {
@@ -1044,14 +1136,14 @@ a.contact-value:hover {
 .form-group select {
     appearance: none;
     -webkit-appearance: none;
-    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23d4af37' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23c5a028' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 18px center;
     padding-right: 40px;
 }
 
 .form-group select option {
-    background-color: var(--bg-secondary);
+    background-color: #ffffff;
     color: var(--text-primary);
 }
 
@@ -1063,38 +1155,45 @@ a.contact-value:hover {
 }
 
 .form-status.success {
-    color: #4ade80;
+    color: #16a34a;
 }
 
 .form-status.error {
-    color: #f87171;
+    color: #dc2626;
 }
 
-/* --- Comments Section --- */
+/* --- Reviews & Comments Section --- */
+.reviews-section,
 .comments-section {
-    background-color: rgba(10, 10, 10, 0.7);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-top: 1px solid rgba(197, 160, 40, 0.12);
+    border-bottom: 1px solid rgba(197, 160, 40, 0.12);
+    padding: 100px 0;
 }
 
-/* Comments Component Styling */
+/* Reviews Container */
+.reviews-container,
 .comments-container {
-    max-width: 880px;
+    max-width: 1100px;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
 }
 
 .comment-form-card {
     background-color: var(--bg-card);
-    border: 1px solid rgba(212, 175, 55, 0.18);
+    border: 1px solid rgba(197, 160, 40, 0.18);
     border-radius: var(--radius-lg);
     padding: 40px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
     transition: var(--transition-smooth);
 }
 
 .comment-form-card:hover {
-    border-color: rgba(212, 175, 55, 0.32);
+    border-color: rgba(197, 160, 40, 0.35);
 }
 
 .comment-form-header {
@@ -1137,7 +1236,7 @@ a.contact-value:hover {
     font-size: 1.7rem;
     line-height: 1;
     cursor: pointer;
-    color: #444444;
+    color: #d1c7b7;
     padding: 2px 4px;
     transition: transform 0.15s ease, color 0.15s ease;
     user-select: none;
@@ -1151,13 +1250,13 @@ a.contact-value:hover {
 
 .star-btn.active {
     color: var(--gold-solid);
-    text-shadow: 0 0 10px rgba(212, 175, 55, 0.45);
+    text-shadow: 0 0 10px rgba(197, 160, 40, 0.35);
 }
 
 .rating-label {
     font-size: 0.85rem;
     color: var(--gold-solid);
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: 0.04em;
 }
 
@@ -1174,10 +1273,10 @@ a.contact-value:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 50px;
+    margin-top: 20px;
     margin-bottom: 24px;
     padding-bottom: 14px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid rgba(30, 26, 21, 0.08);
 }
 
 .feed-title-wrapper {
@@ -1200,16 +1299,16 @@ a.contact-value:hover {
     height: 26px;
     padding: 0 8px;
     border-radius: 13px;
-    background-color: rgba(212, 175, 55, 0.15);
+    background-color: rgba(197, 160, 40, 0.15);
     color: var(--gold-solid);
     font-size: 0.8rem;
     font-weight: 600;
-    border: 1px solid rgba(212, 175, 55, 0.3);
+    border: 1px solid rgba(197, 160, 40, 0.3);
 }
 
 .btn-refresh {
     background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(30, 26, 21, 0.12);
     border-radius: var(--radius-sm);
     color: var(--text-muted);
     font-size: 0.85rem;
@@ -1223,8 +1322,8 @@ a.contact-value:hover {
 
 .btn-refresh:hover {
     color: var(--gold-solid);
-    border-color: rgba(212, 175, 55, 0.4);
-    background-color: rgba(212, 175, 55, 0.06);
+    border-color: rgba(197, 160, 40, 0.4);
+    background-color: rgba(255, 255, 255, 0.8);
 }
 
 .refresh-icon.spinning {
@@ -1236,25 +1335,28 @@ a.contact-value:hover {
     to { transform: rotate(360deg); }
 }
 
+/* Responsive Grid of Real Comment Cards */
 .comments-list {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 26px;
 }
 
 .comment-item {
     background-color: var(--bg-card);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: var(--radius-md);
-    padding: 24px 28px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(197, 160, 40, 0.15);
+    border-radius: var(--radius-lg);
+    padding: 32px 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
     transition: var(--transition-smooth);
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    justify-content: space-between;
+    gap: 18px;
     position: relative;
     overflow: hidden;
     animation: fadeInComment 0.4s ease-out;
+    height: 100%;
 }
 
 .comment-item::before {
@@ -1265,13 +1367,26 @@ a.contact-value:hover {
     bottom: 0;
     width: 3px;
     background: var(--gold-gradient);
-    opacity: 0.75;
+    opacity: 0.8;
+}
+
+.comment-item::after {
+    content: '"';
+    position: absolute;
+    top: 14px;
+    right: 24px;
+    font-family: var(--font-heading);
+    font-size: 4.8rem;
+    line-height: 1;
+    color: rgba(197, 160, 40, 0.08);
+    pointer-events: none;
 }
 
 .comment-item:hover {
-    border-color: rgba(212, 175, 55, 0.25);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+    border-color: rgba(197, 160, 40, 0.35);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(197, 160, 40, 0.15);
+    background-color: var(--bg-card-hover);
 }
 
 @keyframes fadeInComment {
@@ -1288,7 +1403,7 @@ a.contact-value:hover {
 .comment-item-top {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     flex-wrap: wrap;
     gap: 12px;
 }
@@ -1300,12 +1415,12 @@ a.contact-value:hover {
 }
 
 .comment-avatar {
-    width: 38px;
-    height: 38px;
+    width: 42px;
+    height: 42px;
     border-radius: 50%;
-    background: linear-gradient(135deg, rgba(212, 175, 55, 0.25) 0%, rgba(170, 124, 17, 0.3) 100%);
-    border: 1px solid rgba(212, 175, 55, 0.4);
-    color: var(--gold-light);
+    background: linear-gradient(135deg, rgba(243, 229, 171, 0.6) 0%, rgba(197, 160, 40, 0.3) 100%);
+    border: 1px solid rgba(197, 160, 40, 0.35);
+    color: var(--gold-dark);
     font-weight: 600;
     font-size: 0.95rem;
     display: flex;
@@ -1317,44 +1432,60 @@ a.contact-value:hover {
 }
 
 .comment-author-name {
-    font-size: 1rem;
+    font-size: 1.05rem;
     font-weight: 600;
     color: var(--text-primary);
+    line-height: 1.2;
+}
+
+.comment-author-badge {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    display: block;
+    margin-top: 3px;
 }
 
 .comment-item-meta {
     display: flex;
-    align-items: center;
-    gap: 12px;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
 }
 
 .comment-stars {
     color: var(--gold-solid);
     letter-spacing: 2px;
     font-size: 0.95rem;
-    text-shadow: 0 0 6px rgba(212, 175, 55, 0.3);
+    text-shadow: 0 0 6px rgba(197, 160, 40, 0.25);
 }
 
 .comment-date {
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     color: var(--text-muted);
 }
 
 .comment-item-message {
     font-size: 0.95rem;
-    line-height: 1.65;
-    color: #d4d4d4;
+    line-height: 1.7;
+    color: var(--text-primary);
     word-break: break-word;
     white-space: pre-line;
+    font-style: italic;
+    position: relative;
+    z-index: 1;
+    flex-grow: 1;
 }
 
 .comments-empty {
     text-align: center;
     padding: 50px 20px;
     background-color: var(--bg-card);
-    border: 1px dashed rgba(255, 255, 255, 0.08);
+    border: 1px dashed rgba(30, 26, 21, 0.15);
     border-radius: var(--radius-md);
     color: var(--text-muted);
+    grid-column: 1 / -1;
 }
 
 .comments-empty-icon {
@@ -1372,38 +1503,25 @@ a.contact-value:hover {
     gap: 14px;
     color: var(--text-muted);
     font-size: 0.95rem;
+    grid-column: 1 / -1;
 }
 
 .comment-spinner {
     width: 32px;
     height: 32px;
-    border: 3px solid rgba(212, 175, 55, 0.15);
+    border: 3px solid rgba(197, 160, 40, 0.15);
     border-top-color: var(--gold-solid);
     border-radius: 50%;
     animation: spin-refresh 0.8s linear infinite;
 }
 
-@media (max-width: 768px) {
-    .comment-form-card {
-        padding: 24px;
-    }
-
-    .comment-item {
-        padding: 18px 20px;
-    }
-
-    .comment-item-top {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
-    }
-}
-
 /* --- Footer Section --- */
 .main-footer {
-    background-color: var(--bg-secondary);
+    background-color: rgba(246, 245, 240, 0.88);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     padding: 80px 0 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.03);
+    border-top: 1px solid rgba(197, 160, 40, 0.18);
 }
 
 .footer-container {
@@ -1420,6 +1538,7 @@ a.contact-value:hover {
 .footer-tagline {
     font-size: 0.9rem;
     max-width: 320px;
+    color: var(--text-muted);
 }
 
 .footer-links h4,
@@ -1428,6 +1547,7 @@ a.contact-value:hover {
     margin-bottom: 24px;
     position: relative;
     padding-bottom: 8px;
+    color: var(--text-primary);
 }
 
 .footer-links h4::after,
@@ -1463,10 +1583,11 @@ a.contact-value:hover {
 .footer-info p {
     font-size: 0.9rem;
     margin-bottom: 12px;
+    color: var(--text-muted);
 }
 
 .footer-bottom {
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-top: 1px solid rgba(30, 26, 21, 0.08);
     padding: 24px 0;
 }
 
